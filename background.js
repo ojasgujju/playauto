@@ -1,14 +1,9 @@
 // background.js
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    try {
-      if (message.type === 'ACTION_RECORDED') {
-        // Handle message
-        sendResponse({success: true});
-      }
-    } catch (err) {
-      console.error('Error handling message:', err);
-      sendResponse({success: false, error: err.message});
-    }
-    return true; // Keep message channel open for async response
-  });
-  
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.type === 'ACTION_RECORDED') {
+    console.log('Action recorded:', request.action);
+    // Handle the recorded action here
+    sendResponse({ status: 'ok' });
+  }
+  return true; // Keep message channel open for async response
+});

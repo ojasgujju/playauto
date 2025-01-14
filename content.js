@@ -31,10 +31,18 @@ document.addEventListener('click', (e) => {
         text: e.target.textContent?.trim()
     };
     
-    chrome.runtime.sendMessage({
-        type: 'ACTION_RECORDED',
-        action
-    });
+    try {
+        chrome.runtime.sendMessage({
+            type: 'ACTION_RECORDED',
+            action
+        }, response => {
+            if (chrome.runtime.lastError) {
+                console.error('Failed to send message:', chrome.runtime.lastError);
+            }
+        });
+    } catch (error) {
+        console.error('Failed to send message:', error);
+    }
 });
 
 document.addEventListener('input', (e) => {
@@ -46,8 +54,16 @@ document.addEventListener('input', (e) => {
         url: window.location.href
     };
     
-    chrome.runtime.sendMessage({
-        type: 'ACTION_RECORDED',
-        action
-    });
+    try {
+        chrome.runtime.sendMessage({
+            type: 'ACTION_RECORDED',
+            action
+        }, response => {
+            if (chrome.runtime.lastError) {
+                console.error('Failed to send message:', chrome.runtime.lastError);
+            }
+        });
+    } catch (error) {
+        console.error('Failed to send message:', error);
+    }
 });
