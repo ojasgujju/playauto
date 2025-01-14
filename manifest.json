@@ -1,30 +1,25 @@
+// manifest.json
 {
-    "manifest_version": 3,
-    "name": "User Journey Tracker",
-    "version": "1.0",
-    "description": "Records user journeys and tests them across browsers",
-    "permissions": [
-      "storage",
-      "tabs",
-      "activeTab",
-      "scripting",
-      "downloads"
-    ],
-    "content_security_policy": {
-      "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'",
-      "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self'; child-src 'self'"
-    },
-    "action": {
-      "default_popup": "popup/popup.html",
-      "default_title": "User Journey Tracker"
-    },
-    "background": {
-      "service_worker": "background.js",
-      "type": "module"
-    },
-    "content_scripts": [{
+  "manifest_version": 3,
+  "name": "Customer Journey Recorder",
+  "version": "1.0",
+  "description": "Records customer journeys and generates cross-browser test cases",
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting",
+    "downloads"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
       "matches": ["<all_urls>"],
       "js": ["content.js"]
-    }]
-  }
-  
+    }
+  ]
+}
