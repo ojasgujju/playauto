@@ -1,17 +1,30 @@
 {
-  "manifest_version": 3,
-  "name": "PlayAuto",
-  "version": "1.0",
-  "description": "Automation recorder for web interactions",
-  "permissions": [
-    "activeTab",
-    "scripting"
-  ],
-  "background": {
-    "service_worker": "background.js"
-  },
-  "content_scripts": [{
-    "matches": ["<all_urls>"],
-    "js": ["content.js"]
-  }]
-}
+    "manifest_version": 3,
+    "name": "User Journey Tracker",
+    "version": "1.0",
+    "description": "Records user journeys and tests them across browsers",
+    "permissions": [
+      "storage",
+      "tabs",
+      "activeTab",
+      "scripting",
+      "downloads"
+    ],
+    "content_security_policy": {
+      "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'",
+      "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self'; child-src 'self'"
+    },
+    "action": {
+      "default_popup": "popup/popup.html",
+      "default_title": "User Journey Tracker"
+    },
+    "background": {
+      "service_worker": "background.js",
+      "type": "module"
+    },
+    "content_scripts": [{
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }]
+  }
+  
